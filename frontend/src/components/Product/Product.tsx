@@ -1,8 +1,8 @@
 import { Wallet } from "@mercadopago/sdk-react";
 import { useEffect, useState } from "react";
 
-async function createPreference() {
-  const data = await fetch('http://localhost:3000/create_preference', {
+async function createPreference(apiUrl: string) {
+  const data = await fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ export default function Product() {
   }, [])
 
   async function handlePreference() {
-    const preferenceId = await createPreference();
+    const preferenceId = await createPreference(`${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/create_preference`);
     setPreferenceId(preferenceId);
   }
 
